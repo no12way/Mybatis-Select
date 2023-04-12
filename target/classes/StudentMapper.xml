@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="clazzSelect" >
+    <resultMap id="res" type="org.pojo.Student">
+        <id property="sid" column="sid"></id>
+        <result property="sname" column="sname"></result>
+        <association property="clazz"
+                     select="clazzSelect.clazz_"
+                     column="cid"></association>
+    </resultMap>
+    <select id="selectById" resultMap="res">
+        select s.* from t_student s where cid = #{cid}
+    </select>
+    <select id="clazz_" resultType="org.pojo.Clazz">
+        select c.* from t_clazz c where cid = #{cid}
+    </select>
+</mapper>

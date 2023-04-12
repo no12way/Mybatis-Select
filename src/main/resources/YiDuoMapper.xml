@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yiDuo">
+    <resultMap id="clazz_" type="org.pojo_.Clazz">
+        <id property="cid" column="cid"></id>
+        <result property="cname" column="cname"></result>
+        <association property="students" select="yiDuo.selectByCid" column="cid">
+        </association>
+    </resultMap>
+    <select id="selectByCid" resultType="org.pojo_.Student">
+        select s.* from t_student s where s.cid = #{cid}
+    </select>
+    <select id="selectById" resultMap="clazz_">
+        select c.* from t_clazz c where c.cid = #{cid}
+    </select>
+    <select id="selectById_" resultType="org.pojo_.Clazz">
+        select c.* from t_clazz c where c.cid = #{id}
+    </select>
+</mapper>
